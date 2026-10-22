@@ -36,17 +36,27 @@ public class BasicAutoTime extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
-        // Run for 2.0 seconds in a straight line
+        // Run for 1.0 seconds in a straight line
         leftFrontDrive.setPower(0.5);
         rightFrontDrive.setPower(0.5);
         leftBackDrive.setPower(0.5);
         rightBackDrive.setPower(0.5);
-        while (opModeIsActive() && runtime.seconds() < 2.0) {
+        while (opModeIsActive() && runtime.seconds() < 1.0) {
             telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
         }
 
-        // Stop all motion
+        // move back to start
+        leftFrontDrive.setPower(-0.5);
+        rightFrontDrive.setPower(-0.5);
+        leftBackDrive.setPower(-0.5);
+        rightBackDrive.setPower(-0.5);
+
+        while (opModeIsActive() && runtime.seconds() < 2.0) {
+            telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
+            telemetry.update();
+        }
+        //stop moving
         leftFrontDrive.setPower(0);
         rightFrontDrive.setPower(0);
         leftBackDrive.setPower(0);
